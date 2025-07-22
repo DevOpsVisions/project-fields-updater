@@ -1,0 +1,48 @@
+name: 'Auto Update Project Fields on Issue Close'
+description: 'This action automatically updates custom fields of items in a GitHub Project when an issue is closed.'
+author: 'Your Name'
+runs:
+  using: 'composite'
+  steps:
+    - name: Install GitHub CLI
+      shell: bash
+      run: |
+        sudo apt-get update
+        sudo apt-get install gh -y
+
+    - name: Ensure action scripts are executable
+      shell: bash
+      run: |
+        chmod +x ${{ github.action_path }}/src/scripts/*.sh
+
+    - name: Run entrypoint.sh
+      shell: bash
+      run: |
+        ${{ github.action_path }}/src/scripts/entrypoint.sh \
+          "${{ inputs.org }}" \
+          "${{ inputs.project_number }}" \
+          "${{ inputs.owner }}" \
+          "${{ inputs.repo }}" \
+          "${{ inputs.issue_number }}" \
+          "${{ inputs.config_path }}"
+inputs:
+  org:
+    description: 'The organization login.'
+    required: true
+  project_number:
+    description: 'The project number.'
+    required: true
+  owner:
+    description: 'The repository owner.'
+    required: true
+  repo:
+    description: 'The repository name.'
+    required: true
+  issue_number:
+    description: 'The issue number.'
+    required: true
+
+  config_path:
+    description: 'Path to the fields-config.json file.'
+    required: false
+    default: 'fields-config.json'
