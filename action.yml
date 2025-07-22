@@ -1,6 +1,9 @@
 name: 'Auto Update Project Fields on Issue Close'
 description: 'This action automatically updates custom fields of items in a GitHub Project when an issue is closed.'
-author: 'Your Name'
+author: "DevOps Visions"
+branding:
+  icon: 'edit'
+  color: 'blue'
 runs:
   using: 'composite'
   steps:

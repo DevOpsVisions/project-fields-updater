@@ -31,8 +31,6 @@ jobs:
           repo: "your-repo-name"
           issue_number: "${{ github.event.issue.number }}"
           config_path: "fields-config.json" # Optional, defaults to fields-config.json
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 ## Inputs
