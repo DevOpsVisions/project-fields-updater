@@ -16,21 +16,26 @@ on:
   issues:
     types: [closed]
 
+env:
+  GH_TOKEN: ${{ secrets.GH_PAT }}
+
 jobs:
-  update-project-fields:
+  update-custom-fields:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Update Project Fields
+
+      - name: Update Project Item Custom Fields
         uses: DevOpsVisions/project-fields-updater@main
         with:
-          org: "your-org"
-          project_number: "your-project-number"
-          owner: "your-repo-owner"
-          repo: "your-repo-name"
-          issue_number: "${{ github.event.issue.number }}"
-          config_path: "fields-config.json" # Optional, defaults to fields-config.json
+          org: ${{ github.repository_owner }}
+          project_number: 52
+          owner: ${{ github.repository_owner }}
+          repo: ${{ github.event.repository.name }}
+          issue_number: ${{ github.event.issue.number }}
+          config_path: configs/fields-config.json
 ```
 
 ## Inputs
